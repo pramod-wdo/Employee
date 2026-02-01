@@ -10,7 +10,27 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="min-h-screen bg-gray-50 text-gray-900">
+    <header class="border-b bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+        <%= link_to "Employee", root_path, class: "text-lg font-semibold tracking-tight" %>
+
+        <nav class="flex items-center gap-3">
+          <%# Add links as needed %>
+          <%= link_to "Employees", employees_path, class: "text-sm font-medium text-gray-700 hover:text-gray-900" if defined?(employees_path) %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+
+    <footer class="border-t bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-6 text-sm text-gray-500">
+        © <%= Time.current.year %> Employee
+      </div>
+    </footer>
   </body>
 </html>

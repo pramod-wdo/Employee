@@ -3,7 +3,7 @@ class EmploysController < ApplicationController
 
   # GET /employs or /employs.json
   def index
-    @employs = Employ.all
+    @employs = Employ.order(:first_name).page params[:page]
   end
 
   # GET /employs/1 or /employs/1.json
@@ -38,7 +38,7 @@ class EmploysController < ApplicationController
   def update
     respond_to do |format|
       if @employ.update(employ_params)
-        format.html { redirect_to @employ, notice: "Employ was successfully updated.", status: :see_other }
+        format.html { redirect_to employs_path, notice: "Employ was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @employ }
       else
         format.html { render :edit, status: :unprocessable_entity }

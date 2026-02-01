@@ -1,14 +1,54 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Employs</h1>
-
-<div id="employs">
-  <% @employs.each do |employ| %>
-    <%= render employ %>
-    <p>
-      <%= link_to "Show this employ", employ %>
-    </p>
-  <% end %>
+<div class="flex items-center justify-between">
+  <h1 class="text-2xl font-semibold tracking-tight">Employees</h1>
+  <%= link_to "New employee", new_employ_path,
+      class: "inline-flex items-center rounded-lg bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-800" %>
 </div>
 
-<%= link_to "New employ", new_employ_path %>
+<div class="mt-6 overflow-hidden rounded-xl border bg-white">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        <%# Replace these headers with your actual columns %>
+        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">REFNO</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">FIRST NAME</th>
+        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600">GENDER</th>
+        <th class="px-4 py-3"></th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-gray-200">
+      <% @employs.each do |employee| %>
+        <tr class="hover:bg-gray-50">
+          <%# Replace employee.name with your actual attribute(s) %>
+          <td class="px-4 py-3 text-sm font-medium text-gray-900">
+            <%= employee.refno %>
+          </td>
+          <td class="px-4 py-3 text-sm text-gray-600">
+            <%= employee.first_name %>
+          </td>  
+
+          <td class="px-4 py-3 text-sm text-gray-600">
+            <%= employee.gender %>
+          </td>
+
+          <td class="px-4 py-3 text-right text-sm">
+            <div class="flex justify-end gap-2">
+              <%= link_to "Edit", edit_employ_path(employee),
+                  class: "rounded-md border px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50" %>
+
+              <%= button_to "Delete", employee, method: :delete,
+                  form: { data: { turbo_confirm: "Are you sure?" } },
+                  class: "rounded-md border border-red-200 bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700 hover:bg-red-100" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @employs %>
+
+  <% if @employs.empty? %>
+    <div class="p-6 text-sm text-gray-600">No employees yet.</div>
+  <% end %>
+</div>

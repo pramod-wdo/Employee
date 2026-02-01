@@ -1,0 +1,15 @@
+<% flash.each do |type, message| %>
+  <% next if message.blank? %>
+
+  <% classes =
+      case type.to_s
+      when "notice" then "border-green-200 bg-green-50 text-green-900"
+      when "alert"  then "border-red-200 bg-red-50 text-red-900"
+      else               "border-gray-200 bg-gray-50 text-gray-900"
+      end
+  %>
+
+  <div class="mb-4 rounded-lg border p-4 <%= classes %>">
+    <div class="text-sm font-medium"><%= message %></div>
+  </div>
+<% end %>
