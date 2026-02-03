@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_20_074557) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_03_113915) do
   create_schema "extensions"
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "employee_details", force: :cascade do |t|
+    t.bigint "employ_id", null: false
+    t.string "department"
+    t.string "branch"
+    t.string "designation"
+    t.decimal "salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employ_id"], name: "index_employee_details_on_employ_id"
+  end
 
   create_table "employs", force: :cascade do |t|
     t.string "first_name"
@@ -30,4 +41,5 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_20_074557) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "employee_details", "employs"
 end

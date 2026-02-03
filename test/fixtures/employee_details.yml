@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employ: one
+  department: MyString
+  branch: MyString
+  designation: MyString
+  salary: 9.99
+
+two:
+  employ: two
+  department: MyString
+  branch: MyString
+  designation: MyString
+  salary: 9.99
