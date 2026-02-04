@@ -12,7 +12,8 @@ class EmployeeDetailsController < ApplicationController
 
   # GET /employee_details/new
   def new
-    @employee_detail = EmployeeDetail.new
+    @employ = Employ.find(params[:employ_id])
+    @employee_detail = @employ.employee_details.build
   end
 
   # GET /employee_details/1/edit
@@ -21,11 +22,13 @@ class EmployeeDetailsController < ApplicationController
 
   # POST /employee_details or /employee_details.json
   def create
-    @employee_detail = EmployeeDetail.new(employee_detail_params)
-
+    # @employee_detail = EmployeeDetail.new(employee_detail_params)
+    @employ = Employ.find(params[:employ_id])
+    @employee_detail = @employ.employee_details.build(employee_detail_params)
+    
     respond_to do |format|
       if @employee_detail.save
-        format.html { redirect_to @employee_detail, notice: "Employee detail was successfully created." }
+        format.html { redirect_to employ_employee_details_path(@employ), notice: "Employee detail was successfully created." }
         format.json { render :show, status: :created, location: @employee_detail }
       else
         format.html { render :new, status: :unprocessable_entity }

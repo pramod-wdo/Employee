@@ -1,4 +1,4 @@
-<%= form_with(model: employee_detail) do |form| %>
+<%= form_with(model: [@employ, @employee_detail]) do |form| %>
   <% if employee_detail.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(employee_detail.errors.count, "error") %> prohibited this employee_detail from being saved:</h2>
@@ -12,8 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.label :employ_id, style: "display: block" %>
-    <%= form.text_field :employ_id %>
+    <%= form.hidden_field :employ_id, value: @employ_id %>
   </div>
 
   <div>
